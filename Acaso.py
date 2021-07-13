@@ -3,8 +3,8 @@ import pandas as pd
 from sklearn.svm import SVC
 import math
 
-
 def getMyPosition(prcSoFar):
+    nInst = 100
 # Defining the Mapping Function    
     def mapping(x):
         y = 5*np.log((1+2*(x-0.5))/(1-2*(x-0.5)))
@@ -13,11 +13,11 @@ def getMyPosition(prcSoFar):
 # Defining some placeholder variables
     nFeat, nNa = 2,10
     train_array = np.zeros((nInst, len(prcSoFar[1])-nNa, nFeat))
-    model_list = list(np.repeat(0,nInst-50))
-    currentpos = list(np.repeat(0,nInst-50))
+    model_list = list(np.repeat(0,nInst))
+    currentpos = list(np.repeat(0,nInst))
 
 # Fitting the models
-    for i in range(50,nInst):
+    for i in range(50,100):
         prices = pd.Series(np.append(prcSoFar[i],float("NaN"))) 
         pct_changes = prices.pct_change() 
         # Fitting the SVC for each stock per day
